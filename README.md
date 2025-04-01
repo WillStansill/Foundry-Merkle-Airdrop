@@ -1,66 +1,75 @@
-## Foundry
+# 🌳 Merkle Tree Airdrop - Secure & Gas-Efficient Token Distribution
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+## Overview
+The **Merkle Tree Airdrop** is a secure and gas-efficient smart contract implementation for distributing ERC20 tokens to a predefined list of recipients. By leveraging **Merkle Trees**, this project ensures efficient proof verification, reducing gas costs and preventing unnecessary storage writes. 
 
-Foundry consists of:
+This implementation follows industry best practices for **off-chain whitelist management** and **on-chain Merkle root verification**, making it scalable and highly optimized.
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+## 🚀 Features
+- **Merkle Tree-Based Verification**: Utilizes a Merkle root to verify eligibility without storing recipient data on-chain.
+- **Gas Optimization**: Eliminates unnecessary writes to the blockchain, minimizing transaction costs.
+- **Flexible Token Distribution**: Allows recipients to claim their allocated tokens with a single transaction.
+- **Security & Reliability**: Implements thorough testing with Foundry, including fuzz testing and invariant checks.
 
-## Documentation
+## 🛠 Tech Stack
+- **Smart Contract Language**: Solidity
+- **Testing & Deployment**: Foundry, Forge
+- **Merkle Tree Generation**: JavaScript (Node.js)
+- **Blockchain**: Ethereum (Mainnet/Testnet/Local Development)
 
-https://book.getfoundry.sh/
-
-## Usage
-
-### Build
-
-```shell
-$ forge build
+## 📂 Project Structure
+```
+MerkleAirdrop/
+│── src/                 # Solidity smart contracts
+│── scripts/             # Deployment & Merkle root generation
+│── test/                # Foundry test cases
+│── utils/               # Merkle tree construction
+│── README.md            # Project documentation
 ```
 
-### Test
+## 🏗 Deployment Guide
+### **1️⃣ Clone the Repository**
+```bash
+git clone https://github.com/yourusername/merkle-airdrop.git
+cd merkle-airdrop
+```
+### **2️⃣ Install Dependencies**
+```bash
+npm install
+forge install
+```
+### **3️⃣ Generate Merkle Root**
+Before deploying, construct the Merkle tree from the recipient list:
+```bash
+node scripts/generateMerkleRoot.js
+```
+This outputs a `merkleRoot` that will be used in the smart contract.
 
-```shell
-$ forge test
+### **4️⃣ Deploy the Contract**
+```bash
+forge script script/Deploy.s.sol --rpc-url <NETWORK_RPC> --private-key <YOUR_PRIVATE_KEY> --broadcast
 ```
 
-### Format
-
-```shell
-$ forge fmt
+### **5️⃣ Claim Airdrop**
+Eligible recipients can claim their tokens by submitting a Merkle proof:
+```solidity
+airdropContract.claimAirdrop(index, account, amount, proof);
 ```
 
-### Gas Snapshots
+## 🔬 Testing & Security
+- **Unit Testing**: Ensures contract correctness with Foundry's high-performance test framework.
+- **Fuzz Testing**: Identifies edge cases by generating randomized inputs.
+- **Invariant Testing**: Verifies that unauthorized claims cannot be executed.
 
-```shell
-$ forge snapshot
-```
+## 🌍 Future Enhancements
+- **On-Chain Merkle Root Updates**: Enable dynamic recipient lists.
+- **Batch Claims**: Optimize gas fees for multiple claims.
+- **Multi-Token Airdrops**: Expand support to multiple ERC20 tokens.
 
-### Anvil
+## 📬 Contact
+📧 Email: willstansill@gmail.com  
+💼 LinkedIn: [linkedin.com/in/will-stansill](https://linkedin.com/in/will-stansill)  
+🐙 GitHub: [github.com/yourusername](https://github.com/yourusername)  
 
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+---
+**Efficient, secure, and scalable airdrops made simple.** 🔥
